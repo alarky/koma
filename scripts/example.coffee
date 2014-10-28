@@ -30,6 +30,13 @@ module.exports = (robot) ->
   robot.hear /ぬるぽ/, (msg) ->
     msg.send "ｶﾞｯ>> @#{msg.message.user.name}"
 
+  # unix time
+  robot.respond /([0-9]{10})/, (msg) ->
+    time = parseInt(msg.match[1], 10)
+    date = new Date(time * 1000) # ms
+    msg.reply "#{date.getFullYear()}/#{date.getMonth()}/#{date.getDay()} #{date.getHours()}:#{date.getMinutes()}:#{date.getSeconds()}"
+    # TODO %02d
+
 
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
