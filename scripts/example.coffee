@@ -9,6 +9,24 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (robot) ->
+  # 突然の死ジェネレーター
+  robot.hear /^突然の.+$/, (msg) ->
+    console.log(msg)
+    text = msg.message.text
+
+    head = "＿人"
+    for i in text
+        head += "人"
+    head += "人＿"
+
+    content = "＞　#{text}　＜"
+
+    foot = "￣Y"
+    for i in text
+        foot += "^Y"
+    foot += "￣"
+    msg.send "#{head}\n#{content}\n#{foot}"
+
 
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
