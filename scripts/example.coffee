@@ -11,7 +11,6 @@
 module.exports = (robot) ->
   # 突然の死ジェネレーター
   robot.hear /^突然の.+$/, (msg) ->
-    console.log(msg)
     text = msg.message.text
 
     head = "＿人"
@@ -26,6 +25,10 @@ module.exports = (robot) ->
         foot += "^Y"
     foot += "￣"
     msg.send "#{head}\n#{content}\n#{foot}"
+  
+  # ぬるぽ
+  robot.hear /ぬるぽ/, (msg) ->
+    msg.send "ｶﾞｯ>> @#{msg.message.user.name}"
 
 
   # robot.hear /badger/i, (msg) ->
