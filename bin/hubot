@@ -5,4 +5,8 @@ set -e
 npm install
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
 
+export HUBOT_SLACK_TOKEN=UFgKBH2yk11jM1FVcNig2kZz
+export HUBOT_SLACK_TEAM=alarky
+export HUBOT_SLACK_BOTNAME=koma
+
 exec node_modules/.bin/hubot "$@"
