@@ -50,6 +50,13 @@ module.exports = (robot) ->
     path = path.replace(/\//g, "\\")
     msg.send path
 
+  # path convert win => mac 
+  robot.hear /\\\\[^\s]+/, (msg) ->
+    path = msg.match[0]
+
+    # convert
+    path = path.replace(/\\/g, "/")
+    msg.send "cifs:#{path}"
 
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
