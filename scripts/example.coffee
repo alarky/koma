@@ -37,6 +37,19 @@ module.exports = (robot) ->
     msg.reply "#{date.getFullYear()}/#{date.getMonth()}/#{date.getDay()} #{date.getHours()}:#{date.getMinutes()}:#{date.getSeconds()}"
     # TODO %02d
 
+  # path convert mac => win
+  robot.hear /(smb:|cifs:|http:|https:)?\/\/[^\s]+/, (msg) ->
+    path = msg.match[0]
+
+    # http(s)は除外
+    if (path[0..3] == "http")
+      return
+
+    # convert
+    path = path.replace(/^(smb:|cifs:)/g, "")
+    path = path.replace(/\//g, "\\")
+    msg.send path
+
 
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
