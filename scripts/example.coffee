@@ -9,54 +9,6 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (robot) ->
-  # 突然の死ジェネレーター
-  robot.hear /^突然の.+$/, (msg) ->
-    text = msg.message.text
-
-    head = "＿人"
-    for i in text
-        head += "人"
-    head += "人＿"
-
-    content = "＞　#{text}　＜"
-
-    foot = "￣Y"
-    for i in text
-        foot += "^Y"
-    foot += "￣"
-    msg.send "#{head}\n#{content}\n#{foot}"
-  
-  # ぬるぽ
-  robot.hear /ぬるぽ/, (msg) ->
-    msg.send "ｶﾞｯ>> @#{msg.message.user.name}"
-
-  # unix time
-  robot.respond /([0-9]{10})/, (msg) ->
-    time = parseInt(msg.match[1], 10)
-    date = new Date(time * 1000) # ms
-    msg.reply "#{date.getFullYear()}/#{date.getMonth()}/#{date.getDay()} #{date.getHours()}:#{date.getMinutes()}:#{date.getSeconds()}"
-    # TODO %02d
-
-  # path convert mac => win
-  robot.hear /(smb:|cifs:|http:|https:)?\/\/[^\s]+/, (msg) ->
-    path = msg.match[0]
-
-    # http(s)は除外
-    if (path[0..3] == "http")
-      return
-
-    # convert
-    path = path.replace(/^(smb:|cifs:)/g, "")
-    path = path.replace(/\//g, "\\")
-    msg.send path
-
-  # path convert win => mac 
-  robot.hear /\\\\[^\s]+/, (msg) ->
-    path = msg.match[0]
-
-    # convert
-    path = path.replace(/\\/g, "/")
-    msg.send "cifs:#{path}"
 
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
